@@ -16,7 +16,7 @@ class Account
         : m_nameOfAccount(t_name) ,m_balance(t_amount){}
         long int getBalance()
         {
-            return m_money;
+            return m_balance;
         }
         string getName()
         {
@@ -44,7 +44,7 @@ class SavingsAccount : public Account
         }
 };
 
-class Print
+class PrintAccounts
 {
     public:
         void printAccountInfo(Account& t_account)
@@ -66,7 +66,7 @@ class StoreAccounts
 {
     private:
         std::vector<Account> m_accounts;
-        Print m_printer;
+        PrintAccounts m_printer;
     public:
         StoreAccounts(vector<Account>& t_accounts)
         : m_accounts(t_accounts){}
@@ -83,7 +83,7 @@ class StoreAccounts
         {
             return m_accounts[0];
         }
-        Print getPrinter()
+        PrintAccounts getPrinter()
         {
             return m_printer;
         }
