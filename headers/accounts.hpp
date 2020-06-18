@@ -12,13 +12,11 @@ class Account
         long int m_balance;
         string m_nameOfAccount;
     public:
-        Account(string t_name="Person", long int t_amount=0)
-        : m_nameOfAccount(t_name) ,m_balance(t_amount){}
-        long int getBalance()
+        long int& getBalance()
         {
             return m_balance;
         }
-        string getName()
+        string& getName()
         {
             return m_nameOfAccount;
         }
@@ -26,6 +24,8 @@ class Account
 
 class CheckingAccount : public Account
 {
+    private:
+        const string m_type = "Checking";
     public:
         CheckingAccount(string t_name, long int t_amount=0)
         {
@@ -36,6 +36,8 @@ class CheckingAccount : public Account
 
 class SavingsAccount : public Account
 {
+    private:
+        const string m_type = "Savings";
     public:
         SavingsAccount(string t_name, long int t_amount=0)
         {
@@ -54,11 +56,21 @@ class PrintAccounts
         }
         void printName(Account& t_account)
         {
-            cout << "\n" << t_account.getName() << endl;
+            cout << "\nName Of Account: " << t_account.getName() << endl;
         }
         void printBalance(Account& t_account)
         {
-            cout << "\n" << t_account.getBalance() << endl;
+            cout << "\nBalance: " << t_account.getBalance() << endl;
+        }
+        void printAllAccounts(vector<Account>& t_accounts)
+        {
+            cout <<"\n All Stored Accounts" << endl;
+            for(int i = 0; i < t_accounts.size(); i++)
+            {
+                this->printName(t_accounts[i]);
+                cout << "\n";
+            }
+            cout << "\n";
         }
 };
 
@@ -67,21 +79,33 @@ class StoreAccounts
     private:
         std::vector<Account> m_accounts;
         PrintAccounts m_printer;
+        CheckingAccount* createCheckingAccount(string t_nameOfAccount = "", long int t_balance = 0)
+        {
+            return new CheckingAccount(t_nameOfAccount, t_balance);
+        }
+        SavingsAccount* createSavingsAccount(string t_nameOfAccount = "", long int t_balance = 0)
+        {
+            return new SavingsAccount(t_nameOfAccount, t_balance);
+        }
     public:
+        StoreAccounts(){}
         StoreAccounts(vector<Account>& t_accounts)
         : m_accounts(t_accounts){}
-        void printAllAccounts()
+        void addAccount(string t_nameOfAccount = "", long int t_balance = 0, string t_type = "")
         {
-            cout << "\nAll Stored Accounts" << endl;
-            for(int i = 0; i < m_accounts.size(); i++)
+            if(t_type == "Checking")
             {
-                m_printer.printName(m_accounts[i]);
+                m_accounts.push_back(*this->createCheckingAccount(t_nameOfAccount, t_balance));
             }
-            cout << "\nEnd of all accounts in system\n" << endl;
+            else
+            {
+                m_accounts.push_back(*this->createSavingsAccount(t_nameOfAccount, t_balance));
+            }
+            
         }
-        Account getAccount()
+        vector<Account>& getAccounts()
         {
-            return m_accounts[0];
+            return m_accounts;
         }
         PrintAccounts getPrinter()
         {

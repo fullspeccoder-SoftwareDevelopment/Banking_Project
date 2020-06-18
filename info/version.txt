@@ -2,3 +2,6 @@
         - Now has a template to Start with.
     Version 0.2.1
         - Naming difference
+    Version 0.3.1
+        - Added Creation of Accounts
+        - Print all accounts now moved to Print class

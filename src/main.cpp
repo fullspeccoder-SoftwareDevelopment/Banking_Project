@@ -15,12 +15,11 @@ void menu(StoreAccounts& t_strAccounts);
 
 int main()
 {
-    Account acc1("Jake", 500);
-    Account acc2("Jeff");
-    Account acc3("Ryan", 250);
+    SavingsAccount acc1("Jake", 500);
+    CheckingAccount acc2("Jeff");
+    SavingsAccount acc3("Ryan", 250);
     CheckingAccount chckAccount("Jake");
-    vector<Account> accounts{acc1, acc2, acc3, chckAccount};
-    StoreAccounts strAccounts(accounts);
+    StoreAccounts strAccounts;
     menu(strAccounts);
     return 0;
 }
@@ -33,16 +32,16 @@ void menu(StoreAccounts& t_strAccounts)
     while(choice != 3)
     {
         cout << "\nWhat would you like to do?" << endl;
-        cout << "1 - View Balance\t2 - View Available Accounts\t3 - Quit\n";
+        cout << "1 - Create Account\t2 - View Available Accounts\t3 - Quit\n";
         cin >> choice;
 
         switch(choice)
         {
             case 1:
-                cout << "\nBalance Amount" << endl;
+                t_strAccounts.addAccount("Jake", 0, "Checking");
                 break;
             case 2:
-                t_strAccounts.printAllAccounts();
+                t_strAccounts.getPrinter().printAllAccounts(t_strAccounts.getAccounts());
                 break;
             case 3:
                 cout << "\nQuitting Application..." << endl;
