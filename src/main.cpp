@@ -1,51 +1,52 @@
+/*
+______________
+    Bank Project      
+    Version 0.2 
+______________
+*/
+
 #include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <stdio.h>
+#include <vector>
 #include "/Users/jcbwlsn/Downloads/Coding/CPP/Banking Project/headers/accounts.hpp"
 
 using namespace std;
 
-void menu();
+void menu(StoreAccounts& t_strAccounts);
 
 int main()
 {
-    // Account account1(0, "Jake");
-    // RecieptHistory history;
-
-    // account1.setMoney(5);
-    // account1.setDescription("Super Market");
-    // history.pushState(account1.createAccountState());
-    // account1.setMoney(10);
-    // account1.setDescription("Walmart");
-    // history.pushState(account1.createAccountState());
-    // account1.setMoney(15);
-    // account1.setDescription("Gas");
-
-    // cout << account1.getNameOfAccount() << "'s Account History: \n" << endl;
-    // history.printHistory();
-    menu();
+    Account acc1("Jake", 500);
+    Account acc2("Jeff");
+    Account acc3("Ryan", 250);
+    CheckingAccount chckAccount("Jake");
+    vector<Account> accounts{acc1, acc2, acc3, chckAccount};
+    StoreAccounts strAccounts(accounts);
+    menu(strAccounts);
     return 0;
 }
 
-void menu()
+void menu(StoreAccounts& t_strAccounts)
 {
-    Bank bank;
+    cout << "\nWelcome to the Bank!!!" << endl;
+
     int choice = 0;
-    string name = "";
-    cout << "What would you like to do today?" << endl;
-    cout << "\n1 - Create Account\t2 - Quit\n\n";
-    cin >> choice;
-    switch(choice)
+    while(choice != 3)
     {
-        case 1:
-            cout << "What would you like the name to be?";
-            cin >> name;
-            bank.pushAccount(name);
-            break;
-        case 2:
-            break;
+        cout << "\nWhat would you like to do?" << endl;
+        cout << "1 - View Balance\t2 - View Available Accounts\t3 - Quit\n";
+        cin >> choice;
+
+        switch(choice)
+        {
+            case 1:
+                cout << "\nBalance Amount" << endl;
+                break;
+            case 2:
+                t_strAccounts.printAllAccounts();
+                break;
+            case 3:
+                cout << "\nQuitting Application..." << endl;
+                break;
+        }
     }
-    bank.getAccount(name).setDescription("Jake's Account");
-    cout << bank.getAccount(name).getDescription()<< endl;
 }

@@ -2,123 +2,90 @@
 #define ACCOUNTS__HPP_
 
 #include <iostream>
-#include <stdlib.h>
 #include <vector>
-#include <time.h>
 
-class AccountState
-{
-    private:
-        int m_money;
-        std::string m_description;
-    public:
-        AccountState(int t_money, std::string t_description)
-        : m_money(t_money), m_description(t_description)
-        {}
-        int getMoney()
-        {
-            return m_money;
-        }
-        std::string getDescription()
-        {
-            return m_description;
-        }
-};
-
-class RecieptHistory
-{
-    private:
-        std::vector<AccountState> m_states;
-    public:
-        void pushState(AccountState t_state)
-        {
-            m_states.push_back(t_state);
-        }
-        void printHistory()
-        {
-            std::cout << "Transaction Type\tAmount\n" << std::endl;
-            for(int i = 0; i < m_states.size(); i++)
-            {
-                std::cout <<  m_states[i].getDescription() << ":\t\t$" << m_states[i].getMoney() << std::endl;
-            }
-        }
-};
+using namespace std;
 
 class Account
 {
-    private:
-        int m_money;
-        std::string m_description;
-        std::string m_nameOfAccount;
+    protected:
+        long int m_balance;
+        string m_nameOfAccount;
     public:
-        Account()
-        : m_money(0), m_nameOfAccount(""), m_description("")
-        {}
-        Account(int t_money, std::string t_name, std::string t_description="")
-        : m_money(t_money), m_nameOfAccount(t_name), m_description(t_description)
-        {}
-        int getMoney()
+        Account(string t_name="Person", long int t_amount=0)
+        : m_nameOfAccount(t_name) ,m_balance(t_amount){}
+        long int getBalance()
         {
             return m_money;
         }
-        void setMoney(int t_money)
-        {
-            m_money = t_money;
-        }
-        std::string getDescription()
-        {
-            return m_description;
-        }
-        void setDescription(std::string t_description)
-        {
-            m_description = t_description;
-        }
-        std::string getNameOfAccount()
+        string getName()
         {
             return m_nameOfAccount;
         }
-        void setNameOfAccount(std::string t_nameOfAccount)
-        {
-            m_nameOfAccount = t_nameOfAccount;
-        }
-        AccountState createAccountState()
-        {
-            return *new AccountState(m_money,m_description);
-        }
-
 };
 
-class Bank
+class CheckingAccount : public Account
+{
+    public:
+        CheckingAccount(string t_name, long int t_amount=0)
+        {
+            m_nameOfAccount = t_name;
+            m_balance = t_amount;
+        }
+};
+
+class SavingsAccount : public Account
+{
+    public:
+        SavingsAccount(string t_name, long int t_amount=0)
+        {
+            m_nameOfAccount = t_name;
+            m_balance = t_amount;
+        }
+};
+
+class Print
+{
+    public:
+        void printAccountInfo(Account& t_account)
+        {
+            cout << "\n\t\t\t" << t_account.getName() << "'s Account\n" << endl;
+            cout << "\t\t\t\t\tAccount Balance: " << t_account.getBalance() << "\n" << endl;
+        }
+        void printName(Account& t_account)
+        {
+            cout << "\n" << t_account.getName() << endl;
+        }
+        void printBalance(Account& t_account)
+        {
+            cout << "\n" << t_account.getBalance() << endl;
+        }
+};
+
+class StoreAccounts
 {
     private:
-        std::vector<Account> m_listOfAccounts;
-        std::vector<RecieptHistory> m_listOfHistory;
-        Account* createAccount(std::string t_name)
-        {
-            return new Account(0, t_name);
-        }
-        RecieptHistory createHistory()
-        {
-            return *new RecieptHistory();
-        }
+        std::vector<Account> m_accounts;
+        Print m_printer;
     public:
-        void pushAccount(std::string t_name)
+        StoreAccounts(vector<Account>& t_accounts)
+        : m_accounts(t_accounts){}
+        void printAllAccounts()
         {
-            m_listOfAccounts.push_back(*createAccount(t_name));
-            m_listOfHistory.push_back(createHistory());
-        }
-        Account getAccount(std::string t_name)
-        {
-            int i = 0;
-            while(i < m_listOfAccounts.size())
+            cout << "\nAll Stored Accounts" << endl;
+            for(int i = 0; i < m_accounts.size(); i++)
             {
-                if(m_listOfAccounts[i].getNameOfAccount() == t_name)
-                {
-                    break;
-                }
-                i++;
+                m_printer.printName(m_accounts[i]);
             }
-            return m_listOfAccounts[i];
+            cout << "\nEnd of all accounts in system\n" << endl;
+        }
+        Account getAccount()
+        {
+            return m_accounts[0];
+        }
+        Print getPrinter()
+        {
+            return m_printer;
         }
 };
 
