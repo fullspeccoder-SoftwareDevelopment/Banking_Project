@@ -1,11 +1,22 @@
     Version 0.2.0
-        - Now has a template to Start with.
+        - Created better version of original product
     Version 0.2.1
-        - Naming difference
-    Version 0.3.1
-        - Added Creation of Accounts
-        - Print all accounts now moved to Print class
+        - Print is now PrintAccounts
+    Version 0.3.0
+        - Added a way to add & create accounts to StoreAccounts class vector
+        - Moved printAllAccounts method to PrintAccounts class
+        - Added reference pointers to edit original values later on for deposit & withdraw
     Version 0.4.0
-        - Added selection for Accounts
-        - Added dialog for creating accounts
-        - Added ability to print selected account
+        - Added id attribute to Account class
+        - Refactored printAccountInfo
+        - Added printID
+        - Added findAccount in StoreAccounts class
+        - Took out print in StoreAccounts class
+        - Added dialog to case 1 in menu
+        - Added select and find accounts in menu
+        - Added view selected account info
+    Version 0.4.2
+        - Changed some names in the application
+        - Moved a couple of things around to be more organized
+        - Added comments to show what case goes to what
+        - Created better display for users

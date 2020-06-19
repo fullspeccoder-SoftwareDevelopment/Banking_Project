@@ -11,35 +11,38 @@ ______________
 
 using namespace std;
 
-void menu(StoreAccounts& t_strAccounts);
+void menu(ManageAccounts& t_strAccounts);
 
 int main()
 {
     CheckingAccount sampleAccount("Sample");
-    StoreAccounts strAccounts;
+    ManageAccounts strAccounts;
     strAccounts.addAccount("Sample", 0, "Checking");
     menu(strAccounts);
     return 0;
 }
 
-void menu(StoreAccounts& t_strAccounts)
+void menu(ManageAccounts& t_strAccounts)
 {
     Account* selectedAccount = &t_strAccounts.getAccounts()[0];
     PrintAccounts print;
-    cout << "\nWelcome to the Bank!!!" << endl;
+    cout << "\n======================" << endl;
+    cout << "\nWelcome to the Bank!!!\n";
+    cout << "\n======================\n" << endl;
 
     int choice = 0;
     string type = "";
     string name = "";
     int deposit = 0;
-    while(choice != 5)
+    while(choice != 7)
     {
-        cout << "\nWhat would you like to do?" << endl;
-        cout << "1 - Create Account\t2 - Find Account\n3 - View All Available Accounts\t4 - Print Selected Account\n5 - Quit\n";
+        cout << "\n1 - Create Account\n2 - Select Account\n3 - Transaction Menu\n4 - Edit Menu" 
+        << "\n5 - Print Selected Account\n6 - View All Available Accounts\n7 - Quit\n";
         cin >> choice;
 
         switch(choice)
         {
+            // Create an account
             case 1:
                 cout << "\nWhat kind of account would you like to open today?\nChecking\tSavings" << endl;
                 cin >> type;
@@ -51,6 +54,7 @@ void menu(StoreAccounts& t_strAccounts)
                 cout << "\nAccount added!!!" << endl;
                 print.printAccountInfo(t_strAccounts.getAccounts().back());
                 break;
+            // Select Account
             case 2:
                 cout << "Enter ID" << endl;
                 cin >> choice;
@@ -64,10 +68,16 @@ void menu(StoreAccounts& t_strAccounts)
                     cout << "\nAccount Found!!!" << endl;
                 }
                 break;
+            // Transaction Menu
             case 3:
-                print.printAllAccounts(t_strAccounts.getAccounts());
+                cout << "\nTransaction Menu Initializing..." << endl;
                 break;
+            // Edit Menu
             case 4:
+                cout << "\nEdit Menu Initializing..." << endl;
+                break;
+            // Print Selected Account
+            case 5:
                 if(selectedAccount->getName() == "Sample")
                 {
                     cout << "\nNot found" << endl;
@@ -77,7 +87,12 @@ void menu(StoreAccounts& t_strAccounts)
                     print.printAccountInfo(*selectedAccount);
                 }
                 break;
-            case 5:
+            // Print All Accounts
+            case 6:
+                print.printAllAccounts(t_strAccounts.getAccounts());
+                break;
+            // Quits Application
+            case 7:
                 cout << "\nQuitting Application...\n" << endl;
                 break;
         }

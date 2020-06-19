@@ -88,7 +88,7 @@ class PrintAccounts
         }
 };
 
-class StoreAccounts
+class ManageAccounts
 {
     private:
         std::vector<Account> m_accounts;
@@ -101,8 +101,8 @@ class StoreAccounts
             return new SavingsAccount(t_nameOfAccount, t_balance);
         }
     public:
-        StoreAccounts(){}
-        StoreAccounts(vector<Account>& t_accounts)
+        ManageAccounts(){}
+        ManageAccounts(vector<Account>& t_accounts)
         : m_accounts(t_accounts){}
         void addAccount(string t_nameOfAccount = "", long int t_balance = 0, string t_type = "")
         {

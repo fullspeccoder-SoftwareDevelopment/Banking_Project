@@ -1,5 +1,9 @@
 Main Features
-    - Store Accounts
-    - Withdraw & Deposit to Accounts
-    - Close Accounts
-    - Modify Accounts
+    - Create Account
+    - Select Account
+    - Transaction Menu
+    - Edit Menu
+        * Add Delete Option here
+    - Print Selected
+    - Print All Accounts (ID's and Names only)
+    - Quit
