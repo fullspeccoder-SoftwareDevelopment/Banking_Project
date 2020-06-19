@@ -18,6 +18,10 @@ class Account
         {
             return m_balance;
         }
+        void setBalance(long int t_newBalance)
+        {
+            m_balance = t_newBalance;
+        }
         string& getName()
         {
             return m_nameOfAccount;
@@ -54,13 +58,7 @@ class SavingsAccount : public Account
 
 class PrintAccounts
 {
-    public:
-        void printAccountInfo(Account& t_account)
-        {
-            this->printName(t_account);
-            this->printBalance(t_account);
-            this->printID(t_account);
-        }
+    private:
         void printName(Account& t_account)
         {
             cout << "\nName Of Account: " << t_account.getName() << endl;
@@ -72,6 +70,14 @@ class PrintAccounts
         void printID(Account& t_account)
         {
             cout << "\nAccount ID: " << t_account.getID() << endl;
+        }
+    public:
+        void printAccountInfo(Account& t_account)
+        {
+            this->printName(t_account);
+            this->printBalance(t_account);
+            this->printID(t_account);
+            cout << "\n";
         }
         void printAllAccounts(vector<Account>& t_accounts)
         {

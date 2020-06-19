@@ -20,3 +20,10 @@
         - Moved a couple of things around to be more organized
         - Added comments to show what case goes to what
         - Created better display for users
+    Version 0.5.0
+        - Added Transaction Menu with full functionality
+        - Transaction Menu is able to Withdraw, Deposit, and Check Balance of selected Account
+        - Added Editor Menu template
+        - Refactored Print class to make it more abstract and easier to read
+        - Added Contacts & Addresses classes
+        - Added display selected Account

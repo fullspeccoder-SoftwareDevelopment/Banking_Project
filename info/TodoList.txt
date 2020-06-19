@@ -3,7 +3,6 @@ Main Features
     - Select Account
     - Transaction Menu
     - Edit Menu
-        * Add Delete Option here
     - Print Selected
-    - Print All Accounts (ID's and Names only)
+    - Print All Accounts
     - Quit

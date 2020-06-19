@@ -8,6 +8,7 @@ ______________
 #include <iostream>
 #include <vector>
 #include "/Users/jcbwlsn/Downloads/Coding/CPP/Banking Project/headers/accounts.hpp"
+#include "/Users/jcbwlsn/Downloads/Coding/CPP/Banking Project/headers/menus.hpp"
 
 using namespace std;
 
@@ -26,6 +27,8 @@ void menu(ManageAccounts& t_strAccounts)
 {
     Account* selectedAccount = &t_strAccounts.getAccounts()[0];
     PrintAccounts print;
+    TransactionMenu tm;
+    EditorMenu em;
     cout << "\n======================" << endl;
     cout << "\nWelcome to the Bank!!!\n";
     cout << "\n======================\n" << endl;
@@ -36,6 +39,12 @@ void menu(ManageAccounts& t_strAccounts)
     int deposit = 0;
     while(choice != 7)
     {
+
+        if(selectedAccount->getName() != "Sample" && selectedAccount->getID() != 2475278)
+        {
+            cout << "\tSelected Account - " << selectedAccount->getName() << " | ID: " << selectedAccount->getID() << endl;
+        }
+        
         cout << "\n1 - Create Account\n2 - Select Account\n3 - Transaction Menu\n4 - Edit Menu" 
         << "\n5 - Print Selected Account\n6 - View All Available Accounts\n7 - Quit\n";
         cin >> choice;
@@ -65,16 +74,18 @@ void menu(ManageAccounts& t_strAccounts)
                 }
                 else
                 {
-                    cout << "\nAccount Found!!!" << endl;
+                    cout << "\nAccount Found!!!\n" << endl;
                 }
                 break;
             // Transaction Menu
             case 3:
                 cout << "\nTransaction Menu Initializing..." << endl;
+                tm.showMenu(*selectedAccount);
                 break;
             // Edit Menu
             case 4:
                 cout << "\nEdit Menu Initializing..." << endl;
+                em.showMenu(*selectedAccount);
                 break;
             // Print Selected Account
             case 5:
