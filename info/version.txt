@@ -5,3 +5,7 @@
     Version 0.3.1
         - Added Creation of Accounts
         - Print all accounts now moved to Print class
+    Version 0.4.0
+        - Added selection for Accounts
+        - Added dialog for creating accounts
+        - Added ability to print selected account

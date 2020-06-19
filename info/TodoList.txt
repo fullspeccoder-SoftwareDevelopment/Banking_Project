@@ -1,8 +1,5 @@
 Main Features
-    - Create Accounts
     - Store Accounts
-    - Print Accounts
-    - Select Accounts
     - Withdraw & Deposit to Accounts
     - Close Accounts
     - Modify Accounts

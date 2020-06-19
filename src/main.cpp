@@ -15,36 +15,70 @@ void menu(StoreAccounts& t_strAccounts);
 
 int main()
 {
-    SavingsAccount acc1("Jake", 500);
-    CheckingAccount acc2("Jeff");
-    SavingsAccount acc3("Ryan", 250);
-    CheckingAccount chckAccount("Jake");
+    CheckingAccount sampleAccount("Sample");
     StoreAccounts strAccounts;
+    strAccounts.addAccount("Sample", 0, "Checking");
     menu(strAccounts);
     return 0;
 }
 
 void menu(StoreAccounts& t_strAccounts)
 {
+    Account* selectedAccount = &t_strAccounts.getAccounts()[0];
+    PrintAccounts print;
     cout << "\nWelcome to the Bank!!!" << endl;
 
     int choice = 0;
-    while(choice != 3)
+    string type = "";
+    string name = "";
+    int deposit = 0;
+    while(choice != 5)
     {
         cout << "\nWhat would you like to do?" << endl;
-        cout << "1 - Create Account\t2 - View Available Accounts\t3 - Quit\n";
+        cout << "1 - Create Account\t2 - Find Account\n3 - View All Available Accounts\t4 - Print Selected Account\n5 - Quit\n";
         cin >> choice;
 
         switch(choice)
         {
             case 1:
-                t_strAccounts.addAccount("Jake", 0, "Checking");
+                cout << "\nWhat kind of account would you like to open today?\nChecking\tSavings" << endl;
+                cin >> type;
+                cout << "\nWhat would you like to name this account?" << endl;
+                cin >> name;
+                cout <<"\nWould you like to put anything in this account today?" << endl;
+                cin >> deposit;
+                t_strAccounts.addAccount(name, deposit, type);
+                cout << "\nAccount added!!!" << endl;
+                print.printAccountInfo(t_strAccounts.getAccounts().back());
                 break;
             case 2:
-                t_strAccounts.getPrinter().printAllAccounts(t_strAccounts.getAccounts());
+                cout << "Enter ID" << endl;
+                cin >> choice;
+                selectedAccount = &t_strAccounts.findAccount(choice);
+                if(selectedAccount->getName() == "Sample")
+                {
+                    cout << "\nNot found" << endl;
+                }
+                else
+                {
+                    cout << "\nAccount Found!!!" << endl;
+                }
                 break;
             case 3:
-                cout << "\nQuitting Application..." << endl;
+                print.printAllAccounts(t_strAccounts.getAccounts());
+                break;
+            case 4:
+                if(selectedAccount->getName() == "Sample")
+                {
+                    cout << "\nNot found" << endl;
+                }
+                else
+                {
+                    print.printAccountInfo(*selectedAccount);
+                }
+                break;
+            case 5:
+                cout << "\nQuitting Application...\n" << endl;
                 break;
         }
     }
