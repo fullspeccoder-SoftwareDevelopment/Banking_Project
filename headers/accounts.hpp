@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <vector>
+#include "contacts.hpp"
 
 using namespace std;
 
@@ -13,6 +14,7 @@ class Account
         long int m_balance;
         string m_nameOfAccount;
         const long int m_ID = rand() % 9999999 + 1;
+        ContactInfo contact;
     public:
         long int& getBalance()
         {
@@ -29,6 +31,10 @@ class Account
         long int getID()
         {
             return m_ID;
+        }
+        ContactInfo* getContacts()
+        {
+            return &contact;
         }
 };
 
@@ -61,15 +67,33 @@ class PrintAccounts
     private:
         void printName(Account& t_account)
         {
-            cout << "\nName Of Account: " << t_account.getName() << endl;
+            cout << "\nName Of Account: \n\t" << t_account.getName() << endl;
         }
         void printBalance(Account& t_account)
         {
-            cout << "\nBalance: " << t_account.getBalance() << endl;
+            cout << "\nBalance: \n\t" << t_account.getBalance() << endl;
         }
         void printID(Account& t_account)
         {
-            cout << "\nAccount ID: " << t_account.getID() << endl;
+            cout << "\nAccount ID: \n\t" << t_account.getID() << endl;
+        }
+        void printPhoneNumber(Account& t_account)
+        {
+            cout << "\nPhone Number: \n\t";
+            cout <<  t_account.getContacts()->getItem(1) << endl;
+        }
+        void printWorkNumber(Account& t_account)
+        {
+            cout << "\nWork Number: \n\t";
+            cout << t_account.getContacts()->getItem(2) << endl;
+        }
+        void printContactInfo(Account& t_account)
+        {
+            cout << "\nContact Information: " << endl;
+            for(int i = 3; i < 7; i++)
+            {
+                cout << "\t" << t_account.getContacts()->getItem(i) << endl;
+            }
         }
     public:
         void printAccountInfo(Account& t_account)
@@ -77,12 +101,14 @@ class PrintAccounts
             this->printName(t_account);
             this->printBalance(t_account);
             this->printID(t_account);
-            cout << "\n";
+            this->printPhoneNumber(t_account);
+            this->printWorkNumber(t_account);
+            this->printContactInfo(t_account);
         }
         void printAllAccounts(vector<Account>& t_accounts)
         {
-            cout <<"\n All Stored Accounts" << endl;
-            for(int i = 1; i < t_accounts.size(); i++)
+            cout <<"\n\tAll Stored Accounts" << endl;
+            for(int i = 0; i < t_accounts.size(); i++)
             {
                 this->printName(t_accounts[i]);
                 // FOR TESTING PURPOSES ONLY
@@ -112,11 +138,11 @@ class ManageAccounts
         : m_accounts(t_accounts){}
         void addAccount(string t_nameOfAccount = "", long int t_balance = 0, string t_type = "")
         {
-            if(t_type == "Checking")
+            if(t_type == "Checking" || t_type == "checking")
             {
                 m_accounts.push_back(*this->createCheckingAccount(t_nameOfAccount, t_balance));
             }
-            else if(t_type == "Savings")
+            else if(t_type == "Savings" || t_type == "savings")
             {
                 m_accounts.push_back(*this->createSavingsAccount(t_nameOfAccount, t_balance));
             }

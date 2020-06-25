@@ -27,3 +27,13 @@
         - Refactored Print class to make it more abstract and easier to read
         - Added Contacts & Addresses classes
         - Added display selected Account
+    Version 0.6.0
+        - Made including header files adaptable
+        - Removed Sample account
+        - Added a way to automatically select newly created account
+        - Added edge cases for no currently selected account
+        - Added edit functionality (can now update phone, work, address)
+        - Added ContactInfo class (has phone, work, house, city, state, & zip code)
+        - Has getters and setters ^
+        - Added composition for ContactInfo to Account
+        - Format Differences in PrintAccounts

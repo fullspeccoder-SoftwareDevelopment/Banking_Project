@@ -7,8 +7,9 @@ ______________
 
 #include <iostream>
 #include <vector>
-#include "/Users/jcbwlsn/Downloads/Coding/CPP/Banking Project/headers/accounts.hpp"
-#include "/Users/jcbwlsn/Downloads/Coding/CPP/Banking Project/headers/menus.hpp"
+#include <string>
+#include "../headers/accounts.hpp"
+#include "../headers/menus.hpp"
 
 using namespace std;
 
@@ -16,16 +17,16 @@ void menu(ManageAccounts& t_strAccounts);
 
 int main()
 {
-    CheckingAccount sampleAccount("Sample");
+    // CheckingAccount sampleAccount("Sample");
     ManageAccounts strAccounts;
-    strAccounts.addAccount("Sample", 0, "Checking");
+    // strAccounts.addAccount("Sample", 0, "Checking");
     menu(strAccounts);
     return 0;
 }
 
 void menu(ManageAccounts& t_strAccounts)
 {
-    Account* selectedAccount = &t_strAccounts.getAccounts()[0];
+    Account* selectedAccount{nullptr};
     PrintAccounts print;
     TransactionMenu tm;
     EditorMenu em;
@@ -40,7 +41,7 @@ void menu(ManageAccounts& t_strAccounts)
     while(choice != 7)
     {
 
-        if(selectedAccount->getName() != "Sample" && selectedAccount->getID() != 2475278)
+        if(selectedAccount)
         {
             cout << "\tSelected Account - " << selectedAccount->getName() << " | ID: " << selectedAccount->getID() << endl;
         }
@@ -62,36 +63,43 @@ void menu(ManageAccounts& t_strAccounts)
                 t_strAccounts.addAccount(name, deposit, type);
                 cout << "\nAccount added!!!" << endl;
                 print.printAccountInfo(t_strAccounts.getAccounts().back());
+                selectedAccount = &t_strAccounts.getAccounts().back();
                 break;
             // Select Account
             case 2:
+                if(!selectedAccount)
+                {
+                    cout << "\nWarning! No Account Selected/In System" << endl;
+                    break;
+                }
                 cout << "Enter ID" << endl;
                 cin >> choice;
                 selectedAccount = &t_strAccounts.findAccount(choice);
-                if(selectedAccount->getName() == "Sample")
-                {
-                    cout << "\nNot found" << endl;
-                }
-                else
-                {
-                    cout << "\nAccount Found!!!\n" << endl;
-                }
+                cout << "\nAccount Found!!!\n" << endl;
                 break;
             // Transaction Menu
             case 3:
-                cout << "\nTransaction Menu Initializing..." << endl;
+                if(!selectedAccount)
+                {
+                    cout << "\nWarning! No Account Selected/In System" << endl;
+                    break;
+                }
                 tm.showMenu(*selectedAccount);
                 break;
             // Edit Menu
             case 4:
-                cout << "\nEdit Menu Initializing..." << endl;
-                em.showMenu(*selectedAccount);
+                if(!selectedAccount)
+                {
+                    cout << "\nWarning! No Account Selected/In System" << endl;
+                    break;
+                }
+                em.showMenu(*selectedAccount, t_strAccounts);
                 break;
             // Print Selected Account
             case 5:
-                if(selectedAccount->getName() == "Sample")
+                if(!selectedAccount)
                 {
-                    cout << "\nNot found" << endl;
+                    cout << "\nWarning! No Account Selected/In System" << endl;
                 }
                 else
                 {
@@ -100,6 +108,11 @@ void menu(ManageAccounts& t_strAccounts)
                 break;
             // Print All Accounts
             case 6:
+                if(!selectedAccount)
+                {
+                    cerr << "Warning! No Accounts In System" << endl;
+                    break;
+                }
                 print.printAllAccounts(t_strAccounts.getAccounts());
                 break;
             // Quits Application
