@@ -6,6 +6,7 @@ ______________
 */
 
 #include <iostream>
+#include <stdlib.h>
 #include <vector>
 #include <string>
 #include "../headers/accounts.hpp"
@@ -30,9 +31,6 @@ void menu(ManageAccounts& t_strAccounts)
     PrintAccounts print;
     TransactionMenu tm;
     EditorMenu em;
-    cout << "\n======================" << endl;
-    cout << "\nWelcome to the Bank!!!\n";
-    cout << "\n======================\n" << endl;
 
     int choice = 0;
     string type = "";
@@ -40,7 +38,10 @@ void menu(ManageAccounts& t_strAccounts)
     int deposit = 0;
     while(choice != 7)
     {
-
+        system("clear");
+        cout << "\n\t======================" << endl;
+        cout << "\n\tWelcome to the Bank!!!\n";
+        cout << "\n\t======================\n" << endl;
         if(selectedAccount)
         {
             cout << "\tSelected Account - " << selectedAccount->getName() << " | ID: " << selectedAccount->getID() << endl;
@@ -54,6 +55,7 @@ void menu(ManageAccounts& t_strAccounts)
         {
             // Create an account
             case 1:
+                system("clear");
                 cout << "\nWhat kind of account would you like to open today?\nChecking\tSavings" << endl;
                 cin >> type;
                 cout << "\nWhat would you like to name this account?" << endl;
@@ -72,6 +74,7 @@ void menu(ManageAccounts& t_strAccounts)
                     cout << "\nWarning! No Account Selected/In System" << endl;
                     break;
                 }
+                system("clear");
                 cout << "Enter ID" << endl;
                 cin >> choice;
                 selectedAccount = &t_strAccounts.findAccount(choice);
@@ -106,8 +109,11 @@ void menu(ManageAccounts& t_strAccounts)
                 }
                 else
                 {
+                    system("clear");
                     print.printAccountInfo(*selectedAccount);
                 }
+                cout << "1 - Main Menu" << endl;
+                cin >> choice;
                 break;
             // Print All Accounts
             case 6:
@@ -117,6 +123,8 @@ void menu(ManageAccounts& t_strAccounts)
                     break;
                 }
                 print.printAllAccounts(t_strAccounts.getAccounts());
+                cout << "1 - Main Menu" << endl;
+                cin >> choice;
                 break;
             // Quits Application
             case 7:

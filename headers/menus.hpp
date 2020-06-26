@@ -45,6 +45,7 @@ class TransactionMenu
     public:
         void showMenu(Account& t_account)
         {
+            system("clear");
             int anotherTransaction = 1;
             while(anotherTransaction == 1)
             {
@@ -87,6 +88,7 @@ class AddressMenu
     public:
         void showMenu(Account& t_account)
         {
+            system("clear");
             string detail{};
             getline(cin, detail);
             cout << "Change in the following order: \n" << endl;
@@ -158,6 +160,7 @@ class EditorMenu
             getline(cin, detail);
             while(choice != 6 && choice != 5)
             {
+                system("clear");
                 cout << "\nWelcome to the Editor Menu!" << endl;
                 cout << "1 - Update Phone No.\t2 - Update Work No.\n"
                 << "3 - Update Emergency Info\t4 - Update Address (Menu)\n"
