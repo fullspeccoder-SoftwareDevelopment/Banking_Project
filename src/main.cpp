@@ -63,9 +63,10 @@ void menu(ManageAccounts& t_strAccounts)
                 cout <<"\nWould you like to put anything in this account today?" << endl;
                 cin >> deposit;
                 t_strAccounts.addAccount(name, deposit, type);
-                cout << "\nAccount added!!!" << endl;
                 print.printAccountInfo(t_strAccounts.getAccounts().back());
                 selectedAccount = &t_strAccounts.getAccounts().back();
+                cout << "1 - Main Menu" << endl;
+                cin >> choice;
                 break;
             // Select Account
             case 2:
@@ -79,6 +80,7 @@ void menu(ManageAccounts& t_strAccounts)
                 cin >> choice;
                 selectedAccount = &t_strAccounts.findAccount(choice);
                 cout << "\nAccount Found!!!\n" << endl;
+                cout << "1 - Main Menu" << endl;
                 break;
             // Transaction Menu
             case 3:
@@ -123,7 +125,7 @@ void menu(ManageAccounts& t_strAccounts)
                     break;
                 }
                 print.printAllAccounts(t_strAccounts.getAccounts());
-                cout << "1 - Main Menu" << endl;
+                cout << "\n1 - Main Menu" << endl;
                 cin >> choice;
                 break;
             // Quits Application

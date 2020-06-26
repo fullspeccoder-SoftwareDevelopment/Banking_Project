@@ -1,44 +1,30 @@
     Version 0.2.0
         - Created better version of original product
     Version 0.2.1
-        - Print is now PrintAccounts
+        - Naming differences
     Version 0.3.0
-        - Added a way to add & create accounts to StoreAccounts class vector
-        - Moved printAllAccounts method to PrintAccounts class
-        - Added reference pointers to edit original values later on for deposit & withdraw
+        - Added Creation of Accounts
     Version 0.4.0
-        - Added id attribute to Account class
-        - Refactored printAccountInfo
-        - Added printID
-        - Added findAccount in StoreAccounts class
-        - Took out print in StoreAccounts class
-        - Added dialog to case 1 in menu
-        - Added select and find accounts in menu
-        - Added view selected account info
+        - Added Select Account Functionality
+        - Added Dialog in Main Menu
+        - Added Selected Account Info Option
     Version 0.4.2
         - Changed some names in the application
-        - Moved a couple of things around to be more organized
-        - Added comments to show what case goes to what
         - Created better display for users
     Version 0.5.0
         - Added Transaction Menu with full functionality
         - Transaction Menu is able to Withdraw, Deposit, and Check Balance of selected Account
-        - Added Editor Menu template
-        - Refactored Print class to make it more abstract and easier to read
-        - Added Contacts & Addresses classes
-        - Added display selected Account
+        - Added Selected Account Display
     Version 0.6.0
-        - Made including header files adaptable
-        - Removed Sample account
-        - Added a way to automatically select newly created account
-        - Added edge cases for no currently selected account
-        - Added edit functionality (can now update phone, work, address)
-        - Added ContactInfo class (has phone, work, house, city, state, & zip code)
-        - Has getters and setters ^
-        - Added composition for ContactInfo to Account
-        - Format Differences in PrintAccounts
+        - Added Edit Functionality
+        - Folder Duplication ready
+        - No example accounts
+        - Automatically selects newly created account
+        - Roll-off options Added
+        - Added Contact Information
+        - New format for Printing Options
     Version 0.7.0
         - Added Close Account functionality
-        - Less Dependencies for Close Account method in menus header (Option 5)
-        - Added type of account attribute to base class for easier management w/ getter
-        - The way closing works is by setting the element in m_accounts to an empty account object
+    Version 0.7.1
+    - Individual screen menus
+    - Format Changes

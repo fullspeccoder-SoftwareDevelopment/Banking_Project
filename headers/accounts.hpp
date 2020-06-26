@@ -2,6 +2,7 @@
 #define ACCOUNTS__HPP_
 
 #include <iostream>
+#include <iomanip>
 #include <stdlib.h>
 #include <vector>
 #include "contacts.hpp"
@@ -101,6 +102,8 @@ class PrintAccounts
     public:
         void printAccountInfo(Account& t_account)
         {
+            system("clear");
+            cout << "\tCurrent Account Info: " << endl;
             this->printName(t_account);
             this->printBalance(t_account);
             this->printID(t_account);
@@ -110,16 +113,20 @@ class PrintAccounts
         }
         void printAllAccounts(vector<Account>& t_accounts)
         {
-            cout <<"\n\tAll Stored Accounts" << endl;
+            system("clear");
+            cout <<"\t All Stored Accounts" << endl;
+            cout << "\t" << setw(21) << left << setfill('-') << " ";
             for(int i = 0; i < t_accounts.size(); i++)
             {
+                cout << setfill(' ');
                 if(t_accounts[i].getType() == "Checking" || t_accounts[i].getType() == "Savings")
                 {
                 this->printName(t_accounts[i]);
                 // FOR TESTING PURPOSES ONLY
                 this->printID(t_accounts[i]);
                 // FOR TESTING PURPOSES ONLY
-                cout << "\n";
+                cout << setw(28) << left << setfill('-');
+                cout << "\n" << setfill(' ');
                 }
             }
         }

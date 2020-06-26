@@ -91,6 +91,7 @@ class AddressMenu
             system("clear");
             string detail{};
             getline(cin, detail);
+            cout << "Welcome to the Address Menu!\n" << endl;
             cout << "Change in the following order: \n" << endl;
             switch(1)
             {
@@ -161,7 +162,7 @@ class EditorMenu
             while(choice != 6 && choice != 5)
             {
                 system("clear");
-                cout << "\nWelcome to the Editor Menu!" << endl;
+                cout << "\nWelcome to the Editor Menu!\n" << endl;
                 cout << "1 - Update Phone No.\t2 - Update Work No.\n"
                 << "3 - Update Emergency Info\t4 - Update Address (Menu)\n"
                 << "5 - Close Account\t6 - Exit" << endl;
