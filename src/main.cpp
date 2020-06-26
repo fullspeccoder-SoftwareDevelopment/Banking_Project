@@ -98,7 +98,7 @@ void menu(ManageAccounts& t_strAccounts)
                     cout << "\nWarning! No Account Selected" << endl;
                     break;
                 }
-                if(em.showMenu(*selectedAccount, t_strAccounts) == 6)
+                if(em.showMenu(*selectedAccount, t_strAccounts) == 5)
                 {
                     selectedAccount = nullptr;
                 }

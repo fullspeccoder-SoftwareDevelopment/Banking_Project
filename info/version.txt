@@ -26,5 +26,7 @@
     Version 0.7.0
         - Added Close Account functionality
     Version 0.7.1
-    - Individual screen menus
-    - Format Changes
+        - Individual screen menus
+        - Format Changes
+    Version 0.7.2
+        - Fixed bug that unselected current account

@@ -142,7 +142,7 @@ class EditorMenu
         {
             am.showMenu(t_account);
         }
-        string Option5(ManageAccounts& t_accounts)
+        void Option5(ManageAccounts& t_accounts)
         {
             string choice = "";
             cout << "\nAre you sure?" << endl;
@@ -151,7 +151,6 @@ class EditorMenu
             {
                 t_accounts.deleteAccount();
             }
-            return choice;
         }
     public:
         int showMenu(Account& t_account, ManageAccounts& t_accounts)
@@ -184,10 +183,7 @@ class EditorMenu
                         this->Option4(t_account);
                         break;
                     case 5:
-                        if(this->Option5(t_accounts) == "yes")
-                        {
-                            choice = 6;
-                        }
+                        this->Option5(t_accounts);
                         break;
                 }
             }
