@@ -37,3 +37,8 @@
         - Has getters and setters ^
         - Added composition for ContactInfo to Account
         - Format Differences in PrintAccounts
+    Version 0.7.0
+        - Added Close Account functionality
+        - Less Dependencies for Close Account method in menus header (Option 5)
+        - Added type of account attribute to base class for easier management w/ getter
+        - The way closing works is by setting the element in m_accounts to an empty account object

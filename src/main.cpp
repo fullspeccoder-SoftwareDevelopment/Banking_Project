@@ -67,7 +67,7 @@ void menu(ManageAccounts& t_strAccounts)
                 break;
             // Select Account
             case 2:
-                if(!selectedAccount)
+                if(!selectedAccount && t_strAccounts.getAccounts().size() <= 0)
                 {
                     cout << "\nWarning! No Account Selected/In System" << endl;
                     break;
@@ -81,7 +81,7 @@ void menu(ManageAccounts& t_strAccounts)
             case 3:
                 if(!selectedAccount)
                 {
-                    cout << "\nWarning! No Account Selected/In System" << endl;
+                    cout << "\nWarning! No Account Selected" << endl;
                     break;
                 }
                 tm.showMenu(*selectedAccount);
@@ -90,16 +90,19 @@ void menu(ManageAccounts& t_strAccounts)
             case 4:
                 if(!selectedAccount)
                 {
-                    cout << "\nWarning! No Account Selected/In System" << endl;
+                    cout << "\nWarning! No Account Selected" << endl;
                     break;
                 }
-                em.showMenu(*selectedAccount, t_strAccounts);
+                if(em.showMenu(*selectedAccount, t_strAccounts) == 6)
+                {
+                    selectedAccount = nullptr;
+                }
                 break;
             // Print Selected Account
             case 5:
                 if(!selectedAccount)
                 {
-                    cout << "\nWarning! No Account Selected/In System" << endl;
+                    cout << "\nWarning! No Account Selected" << endl;
                 }
                 else
                 {
@@ -108,7 +111,7 @@ void menu(ManageAccounts& t_strAccounts)
                 break;
             // Print All Accounts
             case 6:
-                if(!selectedAccount)
+                if(t_strAccounts.getAccounts().size() <= 0)
                 {
                     cerr << "Warning! No Accounts In System" << endl;
                     break;

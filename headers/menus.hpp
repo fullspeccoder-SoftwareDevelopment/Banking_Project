@@ -139,28 +139,29 @@ class EditorMenu
         {
             am.showMenu(t_account);
         }
-        void Option5(Account& t_account, ManageAccounts& t_accounts)
+        string Option5(ManageAccounts& t_accounts)
         {
             string choice = "";
             cout << "\nAre you sure?" << endl;
             cin >> choice;
             if(choice == "yes")
             {
-                cout << "\nDeleting..." << endl;
+                t_accounts.deleteAccount();
             }
+            return choice;
         }
     public:
-        void showMenu(Account& t_account, ManageAccounts& t_accounts)
+        int showMenu(Account& t_account, ManageAccounts& t_accounts)
         {
             int choice = 0;
             string detail = "";
             getline(cin, detail);
-            while(choice != 6)
+            while(choice != 6 && choice != 5)
             {
                 cout << "\nWelcome to the Editor Menu!" << endl;
                 cout << "1 - Update Phone No.\t2 - Update Work No.\n"
                 << "3 - Update Emergency Info\t4 - Update Address (Menu)\n"
-                << "5 - Delete Account\t6 - Quit" << endl;
+                << "5 - Close Account\t6 - Exit" << endl;
                 cin >> choice;
                 switch(choice)
                 {
@@ -179,10 +180,14 @@ class EditorMenu
                         this->Option4(t_account);
                         break;
                     case 5:
-                        this->Option5(t_account, t_accounts);
+                        if(this->Option5(t_accounts) == "yes")
+                        {
+                            choice = 6;
+                        }
                         break;
                 }
             }
+            return choice;
         }
 };
 

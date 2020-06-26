@@ -13,7 +13,8 @@ class Account
     protected:
         long int m_balance;
         string m_nameOfAccount;
-        const long int m_ID = rand() % 9999999 + 1;
+        long int m_ID = rand() % 9999999 + 1;
+        string m_type;
         ContactInfo contact;
     public:
         long int& getBalance()
@@ -32,6 +33,10 @@ class Account
         {
             return m_ID;
         }
+        string getType()
+        {
+            return m_type;
+        }
         ContactInfo* getContacts()
         {
             return &contact;
@@ -40,11 +45,10 @@ class Account
 
 class CheckingAccount : public Account
 {
-    private:
-        const string m_type = "Checking";
     public:
         CheckingAccount(string t_name, long int t_amount=0)
         {
+            m_type = "Checking";
             m_nameOfAccount = t_name;
             m_balance = t_amount;
         }
@@ -52,11 +56,10 @@ class CheckingAccount : public Account
 
 class SavingsAccount : public Account
 {
-    private:
-        const string m_type = "Savings";
     public:
         SavingsAccount(string t_name, long int t_amount=0)
         {
+            m_type = "Savings";
             m_nameOfAccount = t_name;
             m_balance = t_amount;
         }
@@ -110,13 +113,15 @@ class PrintAccounts
             cout <<"\n\tAll Stored Accounts" << endl;
             for(int i = 0; i < t_accounts.size(); i++)
             {
+                if(t_accounts[i].getType() == "Checking" || t_accounts[i].getType() == "Savings")
+                {
                 this->printName(t_accounts[i]);
                 // FOR TESTING PURPOSES ONLY
                 this->printID(t_accounts[i]);
                 // FOR TESTING PURPOSES ONLY
                 cout << "\n";
+                }
             }
-            cout << "\n";
         }
 };
 
@@ -124,6 +129,7 @@ class ManageAccounts
 {
     private:
         std::vector<Account> m_accounts;
+        int m_index = 0;
         CheckingAccount* createCheckingAccount(string t_nameOfAccount = "", long int t_balance = 0)
         {
             return new CheckingAccount(t_nameOfAccount, t_balance);
@@ -150,20 +156,28 @@ class ManageAccounts
             {
                 cout << "Cannot add account, type of account not available..." << endl;
             }
+            m_index = m_accounts.size() - 1;
         }
         // Find Account
         Account& findAccount(long int t_ID)
         {
-            for(int i = 0; i < m_accounts.size(); i++)
+            for(int i = 0; i < m_accounts.size() - 1; i++)
             {
                 if(t_ID == m_accounts[i].getID())
                 {
                     // return account
+                    m_index = i;
                     return m_accounts[i];
                 }
             }
             //What to return here? possible end.
             return m_accounts[0];
+        }
+        void deleteAccount()
+        {
+            Account* emptyAccount = new Account();
+            m_accounts[m_index] = *emptyAccount;
+            cout << m_index;
         }
         vector<Account>& getAccounts()
         {
