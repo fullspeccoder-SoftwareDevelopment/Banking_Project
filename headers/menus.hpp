@@ -6,6 +6,12 @@
 
 using namespace std;
 
+class I_Menu
+{
+    public:
+        virtual void showMenu(Account& t_account) = 0;
+};
+
 class TransactionMenu
 {
     private:
@@ -91,7 +97,6 @@ class AddressMenu
             system("clear");
             string detail{};
             getline(cin, detail);
-            cout << "Welcome to the Address Menu!\n" << endl;
             cout << "Change in the following order: \n" << endl;
             switch(1)
             {
@@ -134,15 +139,11 @@ class EditorMenu
             cout << "" << endl;
             return t_detail;
         }
-        void Option3()
-        {
-            cout << "\nEmergency Contact Info" << endl;
-        }
-        void Option4(Account& t_account)
+        void updateAddress(Account& t_account)
         {
             am.showMenu(t_account);
         }
-        void Option5(ManageAccounts& t_accounts)
+        void closeAccount(ManageAccounts& t_accounts)
         {
             string choice = "";
             cout << "\nAre you sure?" << endl;
@@ -158,13 +159,13 @@ class EditorMenu
             int choice = 0;
             string detail = "";
             getline(cin, detail);
-            while(choice != 6 && choice != 5)
+            while(choice != 5 && choice != 4)
             {
                 system("clear");
                 cout << "\nWelcome to the Editor Menu!\n" << endl;
                 cout << "1 - Update Phone No.\t2 - Update Work No.\n"
-                << "3 - Update Emergency Info\t4 - Update Address (Menu)\n"
-                << "5 - Close Account\t6 - Exit" << endl;
+                << "3 - Update Address (Menu)\t4 - Close Account\n" 
+                << "5 - Exit" << endl;
                 cin >> choice;
                 switch(choice)
                 {
@@ -177,13 +178,10 @@ class EditorMenu
                         t_account.getContacts()->setItem(detail, 2);
                         break;
                     case 3:
-                        this->Option3();
+                        this->updateAddress(t_account);
                         break;
                     case 4:
-                        this->Option4(t_account);
-                        break;
-                    case 5:
-                        this->Option5(t_accounts);
+                        this->closeAccount(t_accounts);
                         break;
                 }
             }

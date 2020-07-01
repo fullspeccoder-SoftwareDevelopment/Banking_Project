@@ -2,14 +2,25 @@
 #define ACCOUNTS__HPP_
 
 #include <iostream>
-#include <iomanip>
+// #include <iomanip>
 #include <stdlib.h>
 #include <vector>
 #include "contacts.hpp"
 
 using namespace std;
 
-class Account
+class I_Account
+{
+    public:
+        virtual long int& getBalance() = 0;
+        virtual void setBalance(long int t_newBalance) = 0;
+        virtual string& getName() = 0;
+        virtual long int getID() = 0;
+        virtual string getType() = 0;
+        virtual ContactInfo* getContacts() = 0;
+};
+
+class Account : public I_Account
 {
     protected:
         long int m_balance;
@@ -18,27 +29,27 @@ class Account
         string m_type;
         ContactInfo contact;
     public:
-        long int& getBalance()
+        long int& getBalance() final
         {
             return m_balance;
         }
-        void setBalance(long int t_newBalance)
+        void setBalance(long int t_newBalance) final
         {
             m_balance = t_newBalance;
         }
-        string& getName()
+        string& getName() final
         {
             return m_nameOfAccount;
         }
-        long int getID()
+        long int getID() final
         {
             return m_ID;
         }
-        string getType()
+        string getType() final
         {
             return m_type;
         }
-        ContactInfo* getContacts()
+        ContactInfo* getContacts() final
         {
             return &contact;
         }
@@ -63,72 +74,6 @@ class SavingsAccount : public Account
             m_type = "Savings";
             m_nameOfAccount = t_name;
             m_balance = t_amount;
-        }
-};
-
-class PrintAccounts
-{
-    private:
-        void printName(Account& t_account)
-        {
-            cout << "\nName Of Account: \n\t" << t_account.getName() << endl;
-        }
-        void printBalance(Account& t_account)
-        {
-            cout << "\nBalance: \n\t" << t_account.getBalance() << endl;
-        }
-        void printID(Account& t_account)
-        {
-            cout << "\nAccount ID: \n\t" << t_account.getID() << endl;
-        }
-        void printPhoneNumber(Account& t_account)
-        {
-            cout << "\nPhone Number: \n\t";
-            cout <<  t_account.getContacts()->getItem(1) << endl;
-        }
-        void printWorkNumber(Account& t_account)
-        {
-            cout << "\nWork Number: \n\t";
-            cout << t_account.getContacts()->getItem(2) << endl;
-        }
-        void printContactInfo(Account& t_account)
-        {
-            cout << "\nContact Information: " << endl;
-            for(int i = 3; i < 7; i++)
-            {
-                cout << "\t" << t_account.getContacts()->getItem(i) << endl;
-            }
-        }
-    public:
-        void printAccountInfo(Account& t_account)
-        {
-            system("clear");
-            cout << "\tCurrent Account Info: " << endl;
-            this->printName(t_account);
-            this->printBalance(t_account);
-            this->printID(t_account);
-            this->printPhoneNumber(t_account);
-            this->printWorkNumber(t_account);
-            this->printContactInfo(t_account);
-        }
-        void printAllAccounts(vector<Account>& t_accounts)
-        {
-            system("clear");
-            cout <<"\t All Stored Accounts" << endl;
-            cout << "\t" << setw(21) << left << setfill('-') << " ";
-            for(int i = 0; i < t_accounts.size(); i++)
-            {
-                cout << setfill(' ');
-                if(t_accounts[i].getType() == "Checking" || t_accounts[i].getType() == "Savings")
-                {
-                this->printName(t_accounts[i]);
-                // FOR TESTING PURPOSES ONLY
-                this->printID(t_accounts[i]);
-                // FOR TESTING PURPOSES ONLY
-                cout << setw(28) << left << setfill('-');
-                cout << "\n" << setfill(' ');
-                }
-            }
         }
 };
 

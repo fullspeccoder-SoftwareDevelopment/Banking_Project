@@ -5,10 +5,6 @@
 
 using namespace std;
 
-// Will be a composition in Account
-
-
-
 class ContactInfo
 {
     private:

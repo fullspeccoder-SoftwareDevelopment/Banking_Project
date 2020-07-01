@@ -11,10 +11,13 @@ ______________
 #include <string>
 #include "../headers/accounts.hpp"
 #include "../headers/menus.hpp"
+#include "../headers/print.hpp"
 
 using namespace std;
 
 void menu(ManageAccounts& t_strAccounts);
+
+void createAccountMenu(ManageAccounts& t_strAccounts, PrintAccounts& t_printer);
 
 int main()
 {
@@ -25,6 +28,22 @@ int main()
     return 0;
 }
 
+void createAccountMenu(ManageAccounts& t_strAccounts, PrintAccounts& t_printer)
+{
+    system("clear");
+    string type = "";
+    string name = "";
+    int deposit = 0;
+    cout << "\nWhat kind of account would you like to open today?\nChecking\tSavings" << endl;
+    cin >> type;
+    cout << "\nWhat would you like to name this account?" << endl;
+    cin >> name;
+    cout <<"\nWould you like to put anything in this account today?" << endl;
+    cin >> deposit;
+    t_strAccounts.addAccount(name, deposit, type);
+    t_printer.printAccountInfo(t_strAccounts.getAccounts().back());
+}
+
 void menu(ManageAccounts& t_strAccounts)
 {
     Account* selectedAccount{nullptr};
@@ -33,9 +52,6 @@ void menu(ManageAccounts& t_strAccounts)
     EditorMenu em;
 
     int choice = 0;
-    string type = "";
-    string name = "";
-    int deposit = 0;
     while(choice != 7)
     {
         system("clear");
@@ -50,20 +66,12 @@ void menu(ManageAccounts& t_strAccounts)
         cout << "\n1 - Create Account\n2 - Select Account\n3 - Transaction Menu\n4 - Edit Menu" 
         << "\n5 - Print Selected Account\n6 - View All Available Accounts\n7 - Quit\n";
         cin >> choice;
-
+        
         switch(choice)
         {
             // Create an account
             case 1:
-                system("clear");
-                cout << "\nWhat kind of account would you like to open today?\nChecking\tSavings" << endl;
-                cin >> type;
-                cout << "\nWhat would you like to name this account?" << endl;
-                cin >> name;
-                cout <<"\nWould you like to put anything in this account today?" << endl;
-                cin >> deposit;
-                t_strAccounts.addAccount(name, deposit, type);
-                print.printAccountInfo(t_strAccounts.getAccounts().back());
+                createAccountMenu(t_strAccounts, print);
                 selectedAccount = &t_strAccounts.getAccounts().back();
                 cout << "1 - Main Menu" << endl;
                 cin >> choice;
@@ -98,7 +106,7 @@ void menu(ManageAccounts& t_strAccounts)
                     cout << "\nWarning! No Account Selected" << endl;
                     break;
                 }
-                if(em.showMenu(*selectedAccount, t_strAccounts) == 5)
+                if(em.showMenu(*selectedAccount, t_strAccounts) == 4)
                 {
                     selectedAccount = nullptr;
                 }
