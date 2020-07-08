@@ -30,3 +30,6 @@
         - Format Changes
     Version 0.7.2
         - Fixed bug that unselected current account
+    Version 0.7.3
+        - Performance update
+        
